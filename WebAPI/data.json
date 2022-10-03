@@ -1,0 +1,28 @@
+{
+  "Users": [
+    {
+      "Id": 1,
+      "UserName": "Raedrim"
+    }
+  ],
+  "Todos": [
+    {
+      "Id": 1,
+      "Owner": {
+        "Id": 1,
+        "UserName": "Raedrim"
+      },
+      "Title": "live",
+      "IsCompleted": false
+    },
+    {
+      "Id": 2,
+      "Owner": {
+        "Id": 1,
+        "UserName": "Raedrim"
+      },
+      "Title": "live",
+      "IsCompleted": false
+    }
+  ]
+}
