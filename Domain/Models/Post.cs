@@ -1,15 +1,16 @@
 ﻿namespace Domain.Models;
 
-public class Todo
+public class Post
 {
     public int Id { get; set; }
     public User Owner { get; }
     public string Title { get; }
-    public bool IsCompleted { get; }
+    public string Body { get; }
 
-    public Todo(User owner, string title)
+    public Post(User owner, string title, string body)
     {
         Owner = owner;
         Title = title;
+        Body = body;
     }
 }

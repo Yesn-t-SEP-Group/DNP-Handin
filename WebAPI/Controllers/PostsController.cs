@@ -7,22 +7,22 @@ namespace WebAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class TodosController : ControllerBase
+public class PostsController : ControllerBase
 {
 
-    private readonly ITodoLogic todoLogic;
+    private readonly IPostLogic _postLogic;
 
-    public TodosController(ITodoLogic todoLogic)
+    public PostsController(IPostLogic postLogic)
     {
-        this.todoLogic = todoLogic;
+        this._postLogic = postLogic;
     }
 
     [HttpPost]
-    public async Task<ActionResult<Todo>> CreateAsync(TodoCreationDto dto)
+    public async Task<ActionResult<Post>> CreateAsync(PostCreationDto dto)
     {
         try
         {
-            Todo created = await todoLogic.CreateAsync(dto);
+            Post created = await _postLogic.CreateAsync(dto);
             return Created($"/todos/{created.Id}", created);
         }
         catch (Exception e)
@@ -33,13 +33,13 @@ public class TodosController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Todo>>> GetAsync([FromQuery] string? userName, [FromQuery] int? userId,
+    public async Task<ActionResult<IEnumerable<Post>>> GetAsync([FromQuery] string? userName, [FromQuery] int? userId,
         [FromQuery] bool? completedStatus, [FromQuery] string? titleContains)
     {
         try
         {
-            SearchTodoParametersDto parameters = new(userName, userId, completedStatus, titleContains);
-            var todos = await todoLogic.GetAsync(parameters);
+            SearchPostParametersDto parameters = new(userName, userId, completedStatus, titleContains);
+            var todos = await _postLogic.GetAsync(parameters);
             return Ok(todos);
         }
         catch (Exception e)

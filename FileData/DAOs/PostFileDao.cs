@@ -4,16 +4,16 @@ using Domain.Models;
 
 namespace FileData.DAOs;
 
-public class TodoFileDao : ITodoDao
+public class PostFileDao : IPostDao
 {
     private readonly FileContext context;
 
-    public TodoFileDao(FileContext context)
+    public PostFileDao(FileContext context)
     {
         this.context = context;
     }
 
-    public Task<Todo> CreateAsync(Todo todo)
+    public Task<Post> CreateAsync(Post post)
     {
         int id = 1;
         if (context.Todos.Any())
@@ -22,17 +22,17 @@ public class TodoFileDao : ITodoDao
             id++;
         }
 
-        todo.Id = id;
+        post.Id = id;
 
-        context.Todos.Add(todo);
+        context.Todos.Add(post);
         context.SaveChanges();
 
-        return Task.FromResult(todo);
+        return Task.FromResult(post);
     }
 
-    public Task<IEnumerable<Todo>> GetAsync(SearchTodoParametersDto searchParams)
+    public Task<IEnumerable<Post>> GetAsync(SearchPostParametersDto searchParams)
     {
-        IEnumerable<Todo> result = context.Todos.AsEnumerable();
+        IEnumerable<Post> result = context.Todos.AsEnumerable();
 
         if (!string.IsNullOrEmpty(searchParams.Username))
         {
@@ -46,10 +46,10 @@ public class TodoFileDao : ITodoDao
             result = result.Where(t => t.Owner.Id == searchParams.UserId);
         }
 
-        if (searchParams.CompletedStatus != null)
+        /*if (searchParams.CompletedStatus != null)
         {
             result = result.Where(t => t.IsCompleted == searchParams.CompletedStatus);
-        }
+        }*/
 
         if (!string.IsNullOrEmpty(searchParams.TitleContains))
         {

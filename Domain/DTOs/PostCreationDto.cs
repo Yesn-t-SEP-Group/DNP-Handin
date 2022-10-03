@@ -1,13 +1,16 @@
 ﻿namespace Domain.DTOs;
 
-public class TodoCreationDto
+public class PostCreationDto
 {
     public int OwnerId { get; }
     public string Title { get; }
 
-    public TodoCreationDto(int ownerId, string title)
+    public string Body { get; }
+
+    public PostCreationDto(int ownerId, string title, string body)
     {
         OwnerId = ownerId;
         Title = title;
+        Body = body;
     }
 }

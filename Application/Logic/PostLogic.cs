@@ -5,18 +5,18 @@ using Domain.Models;
 
 namespace Application.Logic;
 
-public class TodoLogic : ITodoLogic
+public class PostLogic : IPostLogic
 {
-    private readonly ITodoDao todoDao;
+    private readonly IPostDao _postDao;
     private readonly IUserDao userDao;
 
-    public TodoLogic(ITodoDao todoDao, IUserDao userDao)
+    public PostLogic(IPostDao postDao, IUserDao userDao)
     {
-        this.todoDao = todoDao;
+        this._postDao = postDao;
         this.userDao = userDao;
     }
 
-    public async Task<Todo> CreateAsync(TodoCreationDto dto)
+    public async Task<Post> CreateAsync(PostCreationDto dto)
     {
         User? user = await userDao.GetByIdAsync(dto.OwnerId);
         if (user == null)
@@ -25,19 +25,20 @@ public class TodoLogic : ITodoLogic
         }
 
         ValidateTodo(dto);
-        Todo todo = new Todo(user, dto.Title);
-        Todo created = await todoDao.CreateAsync(todo);
+        Post post = new Post(user, dto.Title, dto.Body);
+        Post created = await _postDao.CreateAsync(post);
         return created;
     }
 
-    public Task<IEnumerable<Todo>> GetAsync(SearchTodoParametersDto searchParameters)
+    public Task<IEnumerable<Post>> GetAsync(SearchPostParametersDto searchParameters)
     {
-        return todoDao.GetAsync(searchParameters);
+        return _postDao.GetAsync(searchParameters);
     }
 
-    private void ValidateTodo(TodoCreationDto dto)
+    private void ValidateTodo(PostCreationDto dto)
     {
         if (string.IsNullOrEmpty(dto.Title)) throw new Exception("Title cannot be empty.");
+        if (string.IsNullOrEmpty(dto.Body)) throw new Exception("Body cannot be empty.");
         // other validation stuff
     }
 }

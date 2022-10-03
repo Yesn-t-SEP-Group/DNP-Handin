@@ -25,7 +25,7 @@
         "Password": null
       },
       "Title": "live",
-      "IsCompleted": false
+      "Body": null
     },
     {
       "Id": 2,
@@ -35,7 +35,25 @@
         "Password": null
       },
       "Title": "live",
-      "IsCompleted": false
+      "Body": null
+    },
+    {
+      "Id": 3,
+      "Owner": {
+        "Id": 1,
+        "UserName": "Raedrim"
+      },
+      "Title": "TEST",
+      "Body": "bing bong to infinity and beyond"
+    },
+    {
+      "Id": 4,
+      "Owner": {
+        "Id": 1,
+        "UserName": "Raedrim"
+      },
+      "Title": "TEST",
+      "Body": "bing bong to infinity and beyond"
     }
   ]
 }
