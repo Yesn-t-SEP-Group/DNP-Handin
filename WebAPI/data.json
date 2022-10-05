@@ -3,12 +3,12 @@
     {
       "Id": 1,
       "UserName": "Raedrim",
-      "Password": null
+      "Password": "levente"
     },
     {
       "Id": 2,
       "UserName": "martin",
-      "Password": null
+      "Password": "password"
     },
     {
       "Id": 3,
