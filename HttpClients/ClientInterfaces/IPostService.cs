@@ -13,6 +13,6 @@ public interface IPostService
         //,string? bodyContains
     );
     Task<PostBasicDto> GetByIdAsync(int id);
-    
     Task UpdateAsync(PostUpdateDto dto);
+    Task DeleteAsync(int id);
 }
