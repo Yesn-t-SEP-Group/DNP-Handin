@@ -14,6 +14,11 @@
       "Id": 3,
       "UserName": "lev",
       "Password": "password"
+    },
+    {
+      "Id": 4,
+      "UserName": "bing",
+      "Password": "bongbong"
     }
   ],
   "Todos": [
@@ -41,7 +46,8 @@
       "Id": 3,
       "Owner": {
         "Id": 1,
-        "UserName": "Raedrim"
+        "UserName": "Raedrim",
+        "Password": null
       },
       "Title": "TEST",
       "Body": "bing bong to infinity and beyond"
@@ -50,7 +56,8 @@
       "Id": 4,
       "Owner": {
         "Id": 1,
-        "UserName": "Raedrim"
+        "UserName": "Raedrim",
+        "Password": null
       },
       "Title": "TEST",
       "Body": "bing bong to infinity and beyond"
