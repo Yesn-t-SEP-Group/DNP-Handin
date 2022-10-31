@@ -12,4 +12,7 @@ public interface IPostService
         string? titleContains
         //,string? bodyContains
     );
+    Task<PostBasicDto> GetByIdAsync(int id);
+    
+    Task UpdateAsync(PostUpdateDto dto);
 }
