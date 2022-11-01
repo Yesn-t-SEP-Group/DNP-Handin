@@ -10,4 +10,10 @@
       <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.10" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Auth" />
+      <Folder Include="Dtos" />
+      <Folder Include="Models" />
+    </ItemGroup>
+
 </Project>
