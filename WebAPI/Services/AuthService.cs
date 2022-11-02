@@ -7,19 +7,31 @@ namespace WebAPI.Services;
 
 public class AuthService : IAuthService
 {
-    private FileContext file = new FileContext();
-
+    //private FileContext file = new FileContext();
+    private readonly IList<User> Users = new List<User>
+    {
+        new User
+        {
+            Id = 1,
+            Password = "test",
+            UserName = "test",
+        }
+    };
 
     public AuthService()
     {
-        file.LoadData();
+    //    file.LoadData();
     }
 
     public Task<User> ValidateUser(string username, string password)
     {
-        file.LoadData();
-        User? existingUser = file.Users.FirstOrDefault(u => 
+    //    file.LoadData();
+    //    User? existingUser = file.Users.FirstOrDefault(u => 
+     //       u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase));
+     
+     User? existingUser = Users.FirstOrDefault(u => 
             u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase));
+     
         
         if (existingUser == null)
         {
@@ -51,8 +63,8 @@ public class AuthService : IAuthService
         
         // save to persistence instead of list
         
-        file.Users.Add(user);
-        file.SaveChanges();
+   //     file.Users.Add(user);
+   //     file.SaveChanges();
         
         return Task.CompletedTask;
     }
