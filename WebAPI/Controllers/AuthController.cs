@@ -62,6 +62,7 @@ public class AuthController : ControllerBase
     {
         try
         {
+            ;
             User user = await authService.ValidateUser(userLoginDto.Username, userLoginDto.Password);
             string token = GenerateJwt(user);
     

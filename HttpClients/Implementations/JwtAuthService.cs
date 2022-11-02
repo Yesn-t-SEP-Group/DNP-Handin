@@ -71,8 +71,9 @@ public class JwtAuthService : IAuthService
 
         string userAsJson = JsonSerializer.Serialize(userLoginDto);
         StringContent content = new(userAsJson, Encoding.UTF8, "application/json");
-
-        HttpResponseMessage response = await client.PostAsync("https://localhost:7130/auth/login", content);
+//BUG figure out how to hardcode port
+        ;
+        HttpResponseMessage response = await client.PostAsync("https://localhost:7260/login", content);
         string responseContent = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
