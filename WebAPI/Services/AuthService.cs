@@ -7,20 +7,12 @@ namespace WebAPI.Services;
 
 public class AuthService : IAuthService
 {
-    //private FileContext file = new FileContext();
-    private readonly IList<User> Users = new List<User>
-    {
-        new User
-        {
-            Id = 1,
-            Password = "test",
-            UserName = "test",
-        }
-    };
+    private FileContext file = new FileContext();
+    private readonly IList<User> Users = new List<User>();
 
     public AuthService()
     {
-    //    file.LoadData();
+    file.LoadData();
     }
 
     public Task<User> ValidateUser(string username, string password)
@@ -28,8 +20,11 @@ public class AuthService : IAuthService
     //    file.LoadData();
     //    User? existingUser = file.Users.FirstOrDefault(u => 
      //       u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase));
+     ;
+     file.LoadData();
      
-     User? existingUser = Users.FirstOrDefault(u => 
+     Console.WriteLine(username+password);
+     User? existingUser = file.Users.FirstOrDefault(u => 
             u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase));
      
         
