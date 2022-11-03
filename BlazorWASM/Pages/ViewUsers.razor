@@ -1,57 +1,87 @@
 ﻿@page "/ViewUsers"
 @using Domain.Models
 @using HttpClients.ClientInterfaces
+@using System.Security.Claims
 @inject IUserService userService;
 <h3 style="text-align: center">Overview of all users</h3>
 
-@if (!string.IsNullOrEmpty(msg))
-{
-    <div>
-        <span>@msg</span>
-    </div>
-}
 
-@if (users == null)
+
+@if (isAdmin)
 {
-    <span>Loading..</span>
-}
-else if (!users.Any())
-{
-    <span>No users to be found</span>
+    <h3>Hello @name</h3>
+    @if (!string.IsNullOrEmpty(msg))
+    {
+        <div>
+            <span>@msg</span>
+        </div>
+    }
+
+    @if (users == null)
+    {
+        <span>Loading..</span>
+    }
+    else if (!users.Any())
+    {
+        <span>No users to be found</span>
+    }
+    else
+    {
+        <div class="users-container">
+            @foreach (User user in users)
+            {
+                <div class="user-card">
+                    <div>
+                        <label>@user.UserName</label>
+                    </div>
+                    <div>
+                        <label>@user.Password</label>
+                    </div>
+                    <div>
+                        <label>@user.Role</label>
+                    </div>
+                </div>
+            }
+
+        </div>
+    }
 }
 else
 {
-    <div class="users-container">
-        @foreach (User user in users)
-        {
-            <div class="user-card">
-                <div>
-                   <label>@user.UserName</label> 
-                </div>
-                <div>
-                    <label>@user.Password</label>
-                </div>
-                
-            </div>
-        }
-    </div>
+    <p>You are not Admin.</p>
 }
 
 @code {
+    
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
     private IEnumerable<User>? users;
     private string msg = "";
 
+    private string? name;
+    private IEnumerable<Claim>? userClaims;
+    private bool isAdmin;
+
     protected override async Task OnInitializedAsync()
     {
-        msg = "";
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isAdmin = user.IsInRole("Admin");
+        Console.WriteLine(isAdmin);
+
         try
-        {
-            users = await userService.GetUsers();
+        {users = await userService.GetUsers();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             msg = e.Message;
         }
+        
+        if (!isAdmin) return;
+        
+        userClaims = user.Claims;
+        name = user.Identity!.Name!;
     }
+    
 }

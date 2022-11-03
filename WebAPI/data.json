@@ -2,28 +2,15 @@
   "Users": [
     {
       "Id": 1,
-      "UserName": "Raedrim",
-      "Password": "levente"
+      "UserName": "admin",
+      "Password": "admin",
+      "Role": "Admin"
     },
     {
       "Id": 2,
-      "UserName": "martin",
-      "Password": "password"
-    },
-    {
-      "Id": 3,
-      "UserName": "lev",
-      "Password": "password"
-    },
-    {
-      "Id": 4,
-      "UserName": "bing",
-      "Password": "bongbong"
-    },
-    {
-      "Id": 5,
-      "UserName": "gabe",
-      "Password": "1234567"
+      "UserName": "user",
+      "Password": "user",
+      "Role": "User"
     }
   ],
   "Posts": null
