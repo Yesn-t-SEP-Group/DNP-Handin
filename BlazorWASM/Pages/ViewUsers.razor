@@ -68,7 +68,6 @@ else
         AuthenticationState authState = await AuthState;
         ClaimsPrincipal user = authState.User;
         isAdmin = user.IsInRole("Admin");
-        Console.WriteLine(isAdmin);
 
         try
         {users = await userService.GetUsers();

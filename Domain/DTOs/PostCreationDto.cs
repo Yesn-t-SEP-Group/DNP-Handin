@@ -13,4 +13,9 @@ public class PostCreationDto
         Title = title;
         Body = body;
     }
+
+    public override string ToString()
+    {
+        return "id: " + OwnerId + "/title: " + Title + "/body: " + Body;
+    }
 }
