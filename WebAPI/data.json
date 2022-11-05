@@ -11,6 +11,12 @@
       "UserName": "user",
       "Password": "user",
       "Role": "User"
+    },
+    {
+      "Id": 3,
+      "UserName": "bingbong",
+      "Password": "bingbong",
+      "Role": "User"
     }
   ],
   "Posts": [
@@ -79,6 +85,17 @@
       },
       "Title": "test 5 asd",
       "Body": ";lkj"
+    },
+    {
+      "Id": 7,
+      "Owner": {
+        "Id": 3,
+        "UserName": "bingbong",
+        "Password": "bingbong",
+        "Role": "User"
+      },
+      "Title": "bingbong",
+      "Body": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffffffffffffffffffffffffffff"
     }
   ]
 }
