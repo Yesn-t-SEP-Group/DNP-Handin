@@ -28,15 +28,10 @@
             <input type="text" @bind="dto.Title"/>
         </div>
         <div class="form-group field">
-            <label>Assignee:</label>
-            <select @bind="dto.OwnerId">
-                <option>Choose</option>
-                @foreach (User user in users)
-                {
-                    <option value="@user.Id">@user.UserName</option>
-                }
-            </select>
+            <label>Body:</label>
+            <input type="text" @bind="dto.Body"/>
         </div>
+        
         <div class="button-row">
             <button @onclick="UpdateAsync" class="acceptbtn">Update</button>
         </div>

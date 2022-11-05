@@ -24,6 +24,61 @@
       },
       "Title": "test user to admin",
       "Body": "testing"
+    },
+    {
+      "Id": 2,
+      "Owner": {
+        "Id": 2,
+        "UserName": "user",
+        "Password": "user",
+        "Role": "User"
+      },
+      "Title": "test 1",
+      "Body": "asdf"
+    },
+    {
+      "Id": 3,
+      "Owner": {
+        "Id": 2,
+        "UserName": "user",
+        "Password": "user",
+        "Role": "User"
+      },
+      "Title": "test 2",
+      "Body": "asfd"
+    },
+    {
+      "Id": 4,
+      "Owner": {
+        "Id": 2,
+        "UserName": "user",
+        "Password": "user",
+        "Role": "User"
+      },
+      "Title": "test 3",
+      "Body": "k;lj"
+    },
+    {
+      "Id": 5,
+      "Owner": {
+        "Id": 1,
+        "UserName": "admin",
+        "Password": "admin",
+        "Role": "Admin"
+      },
+      "Title": "test 4 ",
+      "Body": "sadfa"
+    },
+    {
+      "Id": 6,
+      "Owner": {
+        "Id": 1,
+        "UserName": "admin",
+        "Password": "admin",
+        "Role": "Admin"
+      },
+      "Title": "test 5 asd",
+      "Body": ";lkj"
     }
   ]
 }
