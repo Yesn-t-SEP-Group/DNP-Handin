@@ -70,14 +70,6 @@ else
                 <td>@item.Owner.UserName</td>
                 <td>@item.Title</td>
                 <td>@item.Body</td>
-                <td>
-                    <img src="icons/edit.gif" class="funnel" @onclick="@(() => navMgr.NavigateTo($"/EditPost/{item.Id}"))"/>
-                </td>
-                <td>
-                    <label @onclick="@(() => RemoveTodo(item.Id))" style="cursor:pointer; color: red; font-weight: bold">
-                        &#x2717;
-                    </label>
-                </td>
             </tr>
         }
         </tbody>
@@ -109,25 +101,6 @@ else
         {
             Console.WriteLine(e);
             msg = e.Message;
-        }
-    }
-    
-    private async Task RemoveTodo(int postId)
-    {
-        msg = "";
-        try
-        {
-            await postService.DeleteAsync(postId);
-        
-            var list = new List<Post>(posts!);
-            list.RemoveAll(post => post.Id == postId);
-            posts = list.AsEnumerable();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            msg = e.Message;
-           
         }
     }
 }
