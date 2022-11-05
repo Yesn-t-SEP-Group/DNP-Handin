@@ -4,19 +4,41 @@
       "Id": 1,
       "UserName": "admin",
       "Password": "admin",
-      "Role": "Admin"
+      "Role": "Admin",
+      "Name": null,
+      "Email": null,
+      "PhoneNumber": null,
+      "Address": null
     },
     {
       "Id": 2,
       "UserName": "user",
       "Password": "user",
-      "Role": "User"
+      "Role": "User",
+      "Name": null,
+      "Email": null,
+      "PhoneNumber": null,
+      "Address": null
     },
     {
       "Id": 3,
       "UserName": "bingbong",
       "Password": "bingbong",
-      "Role": "User"
+      "Role": "User",
+      "Name": null,
+      "Email": null,
+      "PhoneNumber": null,
+      "Address": null
+    },
+    {
+      "Id": 4,
+      "UserName": "ooga",
+      "Password": "booga123",
+      "Role": "User",
+      "Name": null,
+      "Email": null,
+      "PhoneNumber": null,
+      "Address": null
     }
   ],
   "Posts": [
@@ -26,7 +48,11 @@
         "Id": 1,
         "UserName": "admin",
         "Password": "admin",
-        "Role": "Admin"
+        "Role": "Admin",
+        "Name": null,
+        "Email": null,
+        "PhoneNumber": null,
+        "Address": null
       },
       "Title": "test user to admin",
       "Body": "testing"
@@ -37,7 +63,11 @@
         "Id": 2,
         "UserName": "user",
         "Password": "user",
-        "Role": "User"
+        "Role": "User",
+        "Name": null,
+        "Email": null,
+        "PhoneNumber": null,
+        "Address": null
       },
       "Title": "test 1",
       "Body": "asdf"
@@ -48,7 +78,11 @@
         "Id": 2,
         "UserName": "user",
         "Password": "user",
-        "Role": "User"
+        "Role": "User",
+        "Name": null,
+        "Email": null,
+        "PhoneNumber": null,
+        "Address": null
       },
       "Title": "test 2",
       "Body": "asfd"
@@ -59,7 +93,11 @@
         "Id": 2,
         "UserName": "user",
         "Password": "user",
-        "Role": "User"
+        "Role": "User",
+        "Name": null,
+        "Email": null,
+        "PhoneNumber": null,
+        "Address": null
       },
       "Title": "test 3",
       "Body": "k;lj"
@@ -70,7 +108,11 @@
         "Id": 1,
         "UserName": "admin",
         "Password": "admin",
-        "Role": "Admin"
+        "Role": "Admin",
+        "Name": null,
+        "Email": null,
+        "PhoneNumber": null,
+        "Address": null
       },
       "Title": "test 4 ",
       "Body": "sadfa"
@@ -81,7 +123,11 @@
         "Id": 1,
         "UserName": "admin",
         "Password": "admin",
-        "Role": "Admin"
+        "Role": "Admin",
+        "Name": null,
+        "Email": null,
+        "PhoneNumber": null,
+        "Address": null
       },
       "Title": "test 5 asd",
       "Body": ";lkj"
@@ -92,10 +138,29 @@
         "Id": 3,
         "UserName": "bingbong",
         "Password": "bingbong",
-        "Role": "User"
+        "Role": "User",
+        "Name": null,
+        "Email": null,
+        "PhoneNumber": null,
+        "Address": null
       },
       "Title": "bingbong",
       "Body": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffffffffffffffffffffffffffff"
+    },
+    {
+      "Id": 8,
+      "Owner": {
+        "Id": 4,
+        "UserName": "ooga",
+        "Password": "booga123",
+        "Role": "User",
+        "Name": null,
+        "Email": null,
+        "PhoneNumber": null,
+        "Address": null
+      },
+      "Title": "testing remake",
+      "Body": "bagool 2"
     }
   ]
 }

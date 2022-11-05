@@ -62,6 +62,7 @@
             dto = new(Id)
             {
                 Title = todoData.Title,
+                Body = todoData.Body,
                 OwnerId = currentlyAssigned.Id
             };
         }
@@ -77,7 +78,7 @@
         try
         {
             await postService.UpdateAsync(dto);
-            navMgr.NavigateTo("/ViewPosts");
+            navMgr.NavigateTo("/MyPosts");
         }
         catch (Exception e)
         {
