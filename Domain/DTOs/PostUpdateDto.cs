@@ -6,7 +6,7 @@ public class PostUpdateDto
     public string? Title { get; set; }
     public string? Body { get; set; }
     public int? OwnerId { get; set; }
-    public bool? IsCompleted { get; set; }
+ //   public bool? IsCompleted { get; set; }
 
     public PostUpdateDto(int id)
     {

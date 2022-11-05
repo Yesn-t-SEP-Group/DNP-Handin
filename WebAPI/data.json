@@ -17,26 +17,13 @@
     {
       "Id": 1,
       "Owner": {
-        "Id": 2,
-        "UserName": "user",
-        "Password": "user",
-        "Role": "User"
+        "Id": 1,
+        "UserName": "admin",
+        "Password": "admin",
+        "Role": "Admin"
       },
-      "Title": "test",
-      "Body": "testing",
-      "IsCompleted": false
-    },
-    {
-      "Id": 2,
-      "Owner": {
-        "Id": 2,
-        "UserName": "user",
-        "Password": "user",
-        "Role": "User"
-      },
-      "Title": "admin",
-      "Body": "asdfa;klj;lkj",
-      "IsCompleted": false
+      "Title": "test user to admin",
+      "Body": "testing"
     }
   ]
 }
