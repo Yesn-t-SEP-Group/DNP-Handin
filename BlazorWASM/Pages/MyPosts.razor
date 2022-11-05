@@ -116,6 +116,7 @@ else
             
             var list = new List<Post>(posts!);
             list.RemoveAll(post => post.Owner.Id != int.Parse(user.FindFirst("Id").Value));
+            list.Sort(CompareById);
             posts = list.AsEnumerable();
            
         }
@@ -142,6 +143,18 @@ else
             Console.WriteLine(e);
             msg = e.Message;
            
+        }
+    }
+    
+    private int CompareById(Post x, Post y)
+    {
+        if (x.Id > y.Id)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
         }
     }
     

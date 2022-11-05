@@ -99,6 +99,10 @@ else
         {
             bool? completedFilterValue = null;
             posts = await postService.GetAsync(usernameFilter, userIdFilter, titleContainsFilter/*, bodyContainsFilter*/);
+            
+            var list = new List<Post>(posts!);
+            list.Sort(CompareById);
+            posts = list.AsEnumerable();
         }
         catch (Exception e)
         {
@@ -106,4 +110,17 @@ else
             msg = e.Message;
         }
     }
+
+    private int CompareById(Post x, Post y)
+    {
+        if (x.Id > y.Id)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
 }
