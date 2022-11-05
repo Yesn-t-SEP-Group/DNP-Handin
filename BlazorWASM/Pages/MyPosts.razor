@@ -102,6 +102,7 @@ else
     {
         authState = await AuthState;
         user = authState.User;
+        await LoadTodos();
     }
 
     private async Task LoadTodos()
@@ -143,4 +144,5 @@ else
            
         }
     }
+    
 }

@@ -58,8 +58,6 @@ else
             <th>Owner ID</th>
             <th>Title</th>
             <th>Body</th>
-            <th>Edit</th>
-            <th>Delete?</th>
         </tr>
         </thead>
         <tbody>
@@ -89,6 +87,11 @@ else
     private int? userIdFilter;
     private string? titleContainsFilter;
     private string? bodyContainsFilter;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTodos();
+    }
 
     private async Task LoadTodos()
     {
