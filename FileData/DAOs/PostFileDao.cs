@@ -65,4 +65,40 @@ public class PostFileDao : IPostDao
 
         return Task.FromResult(result);
     }
+
+    public Task<Post?> GetByIdAsync(int postId)
+    {
+        Post? existing = context.Todos.FirstOrDefault(t => t.Id == postId);
+        return Task.FromResult(existing);
+    }
+
+    public Task UpdateAsync(Post dto)
+    {
+        Post? existing = context.Todos.FirstOrDefault(post => post.Id == dto.Id);
+        if (existing == null)
+        {
+            throw new Exception($"Todo with id {dto.Id} does not exist!");
+        }
+
+        context.Todos.Remove(existing);
+        context.Todos.Add(dto);
+        
+        context.SaveChanges();
+        
+        return Task.CompletedTask;
+    }
+
+    public Task DeleteAsync(int id)
+    {
+        Post? existing = context.Todos.FirstOrDefault(todo => todo.Id == id);
+        if (existing == null)
+        {
+            throw new Exception($"Post with id {id} does not exist!");
+        }
+
+        context.Todos.Remove(existing); 
+        context.SaveChanges();
+
+        return Task.CompletedTask;
+    }
 }

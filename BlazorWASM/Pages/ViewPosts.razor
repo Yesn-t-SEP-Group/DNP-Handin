@@ -3,8 +3,9 @@
 @using HttpClients.ClientInterfaces
 @inject IPostService postService;
 @inject NavigationManager navMgr
+@attribute [Authorize]
 
-<h3>Posts</h3>
+        <h3>Posts</h3>
 <div class="filter-bar">
     <div class="filters-container">
         <img src="icons/@(doShowFilters ? "clear_" : "")funnel.png" class="funnel" @onclick="@(() => doShowFilters = !doShowFilters)" alt="Funnel"/>
@@ -26,6 +27,13 @@
                 <label>Body contains:</label>
                 <input type="text" @bind="bodyContainsFilter"/>
             </div>*/
+            <div>
+                @if (!string.IsNullOrEmpty(msg))
+                {
+                    <label style="color: red">@msg</label>
+                }
+                
+            </div>
         }
     </div>
 </div>
@@ -119,6 +127,7 @@ else
         {
             Console.WriteLine(e);
             msg = e.Message;
+           
         }
     }
 }

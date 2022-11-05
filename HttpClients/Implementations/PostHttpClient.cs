@@ -67,7 +67,7 @@ public class PostHttpClient : IPostService
         string dtoAsJson = JsonSerializer.Serialize(dto);
         StringContent body = new StringContent(dtoAsJson, Encoding.UTF8, "application/json");
 
-        HttpResponseMessage response = await client.PatchAsync("/posts", body);
+        HttpResponseMessage response = await client.PatchAsync("/Posts", body);
         if (!response.IsSuccessStatusCode)
         {
             string content = await response.Content.ReadAsStringAsync();
@@ -106,10 +106,10 @@ public class PostHttpClient : IPostService
     
     public async Task DeleteAsync(int id)
     {
-        HttpResponseMessage response = await client.DeleteAsync($"Todos/{id}");
+        HttpResponseMessage response = await client.DeleteAsync($"Posts/{id}");
+        string content = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
-            string content = await response.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
     }

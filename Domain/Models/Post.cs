@@ -6,6 +6,7 @@ public class Post
     public User Owner { get; }
     public string Title { get; }
     public string Body { get; }
+    public bool IsCompleted { get; set; }
 
     public Post(User owner, string title, string body)
     {
