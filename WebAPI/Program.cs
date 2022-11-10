@@ -2,14 +2,15 @@ using System.Text;
 using Application.Logic;
 using Application.LogicInterfaces;
 using Domain.Auth;
+using EfcDataAccess;
 using EfcDataAccess.DAOs;
 //using FileData;
 //using FileData.DAOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Services;
-using IPostDao = EfcDataAccess.DAOs.IPostDao;
-using IUserDao = EfcDataAccess.DAOs.IUserDao;
+using IPostDao = Application.DaoInterfaces.IPostDao;
+using IUserDao = Application.DaoInterfaces.IUserDao;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IPostDao, PostEfcDao>();
 builder.Services.AddScoped<IPostLogic, PostLogic>();
 AuthorizationPolicies.AddPolicies(builder.Services);
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddDbContext<TodoContext>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

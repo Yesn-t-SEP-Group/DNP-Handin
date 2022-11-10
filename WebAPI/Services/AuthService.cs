@@ -1,18 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using Domain.Models;
-using FileData;
+using EfcDataAccess;
+
+//using FileData;
 
 namespace WebAPI.Services;
 
 public class AuthService : IAuthService
 {
-    private FileContext file = new FileContext();
+    //private FileContext file = new FileContext();
+    private TodoContext context = new TodoContext();
     private readonly IList<User> Users = new List<User>();
 
     public AuthService()
     {
-    file.LoadData();
+    //file.LoadData();
     }
 
     public Task<User> ValidateUser(string username, string password)
@@ -21,11 +24,11 @@ public class AuthService : IAuthService
     //    User? existingUser = file.Users.FirstOrDefault(u => 
      //       u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase));
      ;
-     file.LoadData();
+    // file.LoadData();
      
      Console.WriteLine(username+password);
-     User? existingUser = file.Users.FirstOrDefault(u => 
-            u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase));
+     User? existingUser = context.Users.FirstOrDefault(u => 
+            u.UserName.ToLower().Equals(username.ToLower()));
      
         
         if (existingUser == null)

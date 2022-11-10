@@ -10,7 +10,7 @@ public class TodoContext: DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source = Todo.db");
+        optionsBuilder.UseSqlite("Data Source = ../EfcDataAccess/Todo.db");
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
