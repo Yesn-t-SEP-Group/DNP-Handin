@@ -3,22 +3,16 @@
 @using Domain.DTOs
 @using Domain.Models
 @using HttpClients.ClientInterfaces
+@using System.Security.Claims
 @inject IPostService postService;
 @inject IUserService userService;
 @inject NavigationManager navMgr;
 
 <div class="card">
-    @if (users == null)
+    @if (dto == null)
     {
-        <label>Loading users...</label>
-    }
-    else if (!users.Any())
-    {
-        <label>No users, you cannot create a Todo</label>
-    }
-    else if (dto == null)
-    {
-        <label>Loading Todo data..</label>
+        <label>Loading Todo data dto null..</label>
+        <label>@user.FindFirst("Id").Value</label>
     }
     else
     {
@@ -31,7 +25,7 @@
             <label>Body:</label>
             <input type="text" @bind="dto.Body"/>
         </div>
-        
+
         <div class="button-row">
             <button @onclick="UpdateAsync" class="acceptbtn">Update</button>
         </div>
@@ -45,6 +39,12 @@
 @code {
     [Parameter]
     public int Id { get; set; }
+    
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+
+    AuthenticationState authState;
+    ClaimsPrincipal user;
 
     private PostUpdateDto dto = null!;
     private string msg = "";
@@ -53,17 +53,20 @@
     protected override async Task OnInitializedAsync()
     {
         msg = "";
+        authState = await AuthState;
+        user = authState.User;
+        
         try
         {
-            users = await userService.GetUsers();
+         //   users = await userService.GetUsers();
             PostBasicDto todoData = await postService.GetByIdAsync(Id);
-            User currentlyAssigned = users.First(user => user.UserName.Equals(todoData.OwnerName));
+        //    User currentlyAssigned = users.First(user => user.UserName.Equals(todoData.OwnerName));
 
             dto = new(Id)
             {
                 Title = todoData.Title,
                 Body = todoData.Body,
-                OwnerId = currentlyAssigned.Id
+                OwnerId = int.Parse(user.FindFirst("Id").Value)
             };
         }
         catch (Exception e)

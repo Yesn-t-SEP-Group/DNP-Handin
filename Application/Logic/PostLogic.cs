@@ -108,7 +108,8 @@ public class PostLogic : IPostLogic
             throw new Exception($"Todo with id {id} not found");
         }
 
-        return new PostBasicDto(todo.Id, todo.Owner.UserName, todo.Title, todo.Body); //,todo.IsCompleted);
+        User user = await userDao.GetByIdAsync(todo.OwnerId);
+        return new PostBasicDto(todo.Id, user.UserName, todo.Title, todo.Body); //,todo.IsCompleted);
     }
     
     private  void ValidateTodo(Post dto)

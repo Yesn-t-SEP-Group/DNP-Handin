@@ -54,18 +54,19 @@ public class PostEfcDao : IPostDao
         /*
         context.ChangeTracker.Clear();
         context.Posts.Update(todo);
+      
         await context.SaveChangesAsync();
-        */
-        using (var db = new TodoContext())
+    */
+
+        if (context.Posts.Find(todo.Id) != null)
         {
-            var result = context.Posts.SingleOrDefault(p => p.Id == todo.Id);
-            if (result != null)
-            {
-                result = todo;
-                context.SaveChanges();
-            }
-        }
-        
+            context.Posts.Remove(context.Posts.Find(todo.Id));
+            await context.Posts.AddAsync(todo);
+            await context.SaveChangesAsync();
+
+        };
+
+
     }
 
     public async Task<Post?> GetByIdAsync(int todoId)
@@ -73,6 +74,7 @@ public class PostEfcDao : IPostDao
         Post? found = await context.Posts.FindAsync(todoId);
         return found;
     }
+    
 
     public async Task DeleteAsync(int id)
     {
