@@ -1,10 +1,15 @@
-﻿namespace Domain.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Domain.Models;
 
 public class Post
 {
     public int Id { get; set; }
-    public User Owner { get; }
-    public string Title { get; }
+   
+    public User Owner { get; private set; }
+    
+    public string Title { get; private set; }
+    
     public string Body { get; }
    // public bool IsCompleted { get; set; }
 
@@ -13,5 +18,9 @@ public class Post
         Owner = owner;
         Title = title;
         Body = body;
+    }
+
+    private Post()
+    {
     }
 }
