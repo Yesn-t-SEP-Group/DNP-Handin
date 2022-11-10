@@ -10,7 +10,7 @@ public class Post
     
     public string Title { get; private set; }
     
-    public string Body { get; }
+    public string Body { get; private set; }
    // public bool IsCompleted { get; set; }
 
     public Post(User owner, string title, string body)

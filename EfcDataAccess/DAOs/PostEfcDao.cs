@@ -9,7 +9,7 @@ namespace EfcDataAccess.DAOs;
 public class PostEfcDao : IPostDao
 {
     
-    private readonly TodoContext context;
+    private  TodoContext context;
 
     public PostEfcDao(TodoContext context)
     {
@@ -51,9 +51,21 @@ public class PostEfcDao : IPostDao
 
     public async Task UpdateAsync(Post todo)
     {
+        /*
         context.ChangeTracker.Clear();
         context.Posts.Update(todo);
         await context.SaveChangesAsync();
+        */
+        using (var db = new TodoContext())
+        {
+            var result = context.Posts.SingleOrDefault(p => p.Id == todo.Id);
+            if (result != null)
+            {
+                result = todo;
+                context.SaveChanges();
+            }
+        }
+        
     }
 
     public async Task<Post?> GetByIdAsync(int todoId)
