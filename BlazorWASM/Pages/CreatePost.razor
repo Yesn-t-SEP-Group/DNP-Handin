@@ -1,0 +1,99 @@
+﻿@page "/CreatePost"
+@attribute [Authorize]
+@using Domain.Models
+@using HttpClients.ClientInterfaces
+@using Domain.DTOs
+@using System.Security.Claims
+@inject IUserService userService;
+@inject IPostService postService;
+@inject NavigationManager navMgr
+
+<div class="card">
+    <h3>Create Post</h3>
+        <div class="form-group field">
+            <div>
+                <label>Title:</label>
+                <input type="text" @bind="postTitle"/>
+            </div>
+            <div>
+                <label>Write here:</label>
+                <textarea rows="8" cols="20" @bind="postBody" style="alignment: center"></textarea>
+            </div>
+            
+        </div>
+    
+        <div class="button-row">
+            @if (!string.IsNullOrEmpty(msg))
+            {
+                <label style="color: red">@msg</label>
+            }
+            <button @onclick="Create" class="acceptbtn">Create</button>
+        </div>
+</div>
+
+@code {
+   // private IEnumerable<User>? users;
+ //   private int? selectedUserId;
+    
+    private string postTitle = "";
+    private string postBody = "";
+
+    private string msg = "";
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+    AuthenticationState authState;
+    ClaimsPrincipal user;
+    PostCreationDto dto;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        msg = "";
+        authState = await AuthState;
+        user = authState.User;
+        
+        try
+        {
+        //    users = await userService.GetUsers();
+            
+            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+         
+        }
+    }
+
+    private async Task Create()
+    {
+        msg = "";
+        
+        if (string.IsNullOrEmpty(postTitle))
+        {
+            msg = "Title cannot be empty!";
+            return;
+        }
+        if (string.IsNullOrEmpty(postBody))
+        {
+            msg = "Title cannot be empty!";
+            return;
+        }
+
+        try
+        {
+            int id = int.Parse(user.FindFirst("Id").Value);
+            dto = new(id, postTitle, postBody);
+            await postService.CreateAsync(dto);
+            navMgr.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+       //     msg = e.Message;
+        //    msg = user.ToString();
+       //     msg = (user.FindFirst("Id").Value);
+            msg = dto.ToString();
+        }
+    }
+}

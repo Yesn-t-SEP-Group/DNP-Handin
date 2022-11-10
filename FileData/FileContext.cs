@@ -13,7 +13,7 @@ public class FileContext
         get
         {
             LoadData();
-            return dataContainer!.Todos;
+            return dataContainer!.Posts;
         }
     }
 
@@ -26,7 +26,7 @@ public class FileContext
         }
     }
 
-    private void LoadData()
+    public void LoadData()
     {
         if (dataContainer != null) return;
         
@@ -34,7 +34,7 @@ public class FileContext
         {
             dataContainer = new ()
             {
-                Todos = new List<Post>(),
+                Posts = new List<Post>(),
                 Users = new List<User>()
             };
             return;

@@ -1,0 +1,161 @@
+﻿@page "/MyPosts"
+@using HttpClients.ClientInterfaces
+@using Domain.Models
+@using System.Security.Claims
+@using System.Collections
+@attribute [Authorize]
+@inject IPostService postService;
+@inject NavigationManager navMgr;
+
+<h3>Posts</h3>
+<div class="filter-bar">
+    <div class="filters-container">
+        <img src="icons/@(doShowFilters ? "clear_" : "")funnel.png" class="funnel" @onclick="@(() => doShowFilters = !doShowFilters)" alt="Funnel"/>
+        @if (doShowFilters)
+        {
+            <div class="filter">
+                <label>Title contains:</label>
+                <input type="text" @bind="titleContainsFilter"/>
+            </div>
+            /*<div class="filter">
+                <label>Body contains:</label>
+                <input type="text" @bind="bodyContainsFilter"/>
+            </div>*/
+            <div>
+                @if (!string.IsNullOrEmpty(msg))
+                {
+                    <label style="color: red">@msg</label>
+                }
+                
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <button @onclick="LoadTodos">Load</button>
+</div>
+
+@if (posts == null)
+{
+}
+else if (!posts.Any())
+{
+    <p>No Todos to display</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Post ID</th>
+            <th>Owner ID</th>
+            <th>Title</th>
+            <th>Body</th>
+            <th>Edit</th>
+            <th>Delete?</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in posts)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Owner.UserName</td>
+                <td>@item.Title</td>
+                <td>@item.Body</td>
+                <td>
+                    <img src="icons/edit.gif" class="funnel" @onclick="@(() => navMgr.NavigateTo($"/EditPost/{item.Id}"))"/>
+                </td>
+                <td>
+                    <label @onclick="@(() => RemoveTodo(item.Id))" style="cursor:pointer; color: red; font-weight: bold">
+                        &#x2717;
+                    </label>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+@if (!string.IsNullOrEmpty(msg))
+{
+    <label style="color: red">@msg</label>
+}
+
+@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+
+    AuthenticationState authState;
+    ClaimsPrincipal user;
+
+    private IEnumerable<Post>? posts;
+    private string msg = "";
+    private bool doShowFilters = false;
+
+    private string? usernameFilter;
+    private int? userIdFilter;
+    private string? titleContainsFilter;
+    private string? bodyContainsFilter;
+
+    protected override async Task OnInitializedAsync()
+    {
+        authState = await AuthState;
+        user = authState.User;
+        await LoadTodos();
+    }
+
+    private async Task LoadTodos()
+    {
+        try
+        {
+            bool? completedFilterValue = null;
+            posts = await postService.GetAsync(usernameFilter, userIdFilter, titleContainsFilter/*, bodyContainsFilter*/);
+            
+            
+            
+            var list = new List<Post>(posts!);
+            list.RemoveAll(post => post.Owner.Id != int.Parse(user.FindFirst("Id").Value));
+            list.Sort(CompareById);
+            posts = list.AsEnumerable();
+           
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+    
+    private async Task RemoveTodo(int postId)
+    {
+        msg = "";
+        try
+        {
+            await postService.DeleteAsync(postId);
+        
+            var list = new List<Post>(posts!);
+            list.RemoveAll(post => post.Id == postId);
+            posts = list.AsEnumerable();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+           
+        }
+    }
+    
+    private int CompareById(Post x, Post y)
+    {
+        if (x.Id > y.Id)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+    
+}
