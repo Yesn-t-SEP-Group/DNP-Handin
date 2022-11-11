@@ -82,6 +82,11 @@
 
         try
         {
+            if (postBody.Length > 100)
+            {
+                msg = "Body cannot be more than 100 characters!";
+                throw new Exception(msg);
+            }
             int id = int.Parse(user.FindFirst("Id").Value);
             dto = new(id, postTitle, postBody);
             await postService.CreateAsync(dto);
