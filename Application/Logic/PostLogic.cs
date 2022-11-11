@@ -70,6 +70,11 @@ public class PostLogic : IPostLogic
         User userToUse = user ?? existing.Owner;
         string titleToUse = dto.Title ?? existing.Title;
         string bodyToUse = dto.Body ?? existing.Body;
+
+        if (bodyToUse.Length > 100)
+        {
+            throw new Exception("Body cannot be more than 100 characters!");
+        }
      //   bool completedToUse = dto.IsCompleted ?? existing.IsCompleted;
         
         Post updated = new (userToUse, titleToUse,bodyToUse)
